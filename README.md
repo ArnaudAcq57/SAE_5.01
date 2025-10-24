@@ -13,23 +13,36 @@ Mon travail consiste à intégrer l'acquisition d'image en temps réel ou bien d
 
 ## Avancement - Semaine 1 (17 octobre 2025)
 
-Réalisations techniques
+### Réalisations techniques
 
 **Configuration de l'environnement** 
 - Mise en place du projet Android Studio en Kotlin (SDK minimum API 24).
-- Gestion des permissions : Ajout des permissions CAMERA et READ_EXTERNAL_STORAGE dans AndroidManifest.xml.
-- Intégration de CameraX : Mise en place de la bibliothèque CameraX pour un accès moderne à la caméra, incluant : L'affichage de l'aperçu en temps réel dans l'application. La fonctionnalité de capture de photo avec sauvegarde dans la galerie. La fonctionnalité d'importation d'une image depuis la galerie.
-La préparation à l'analyse vidéo avec ImageAnalysis pour le traitement en temps réel par le modèle d'IA.
+- **Gestion des permissions :** Ajout des permissions `CAMERA` et `READ_EXTERNAL_STORAGE` dans `AndroidManifest.xml`.
+- **Intégration de CameraX :** Mise en place de la bibliothèque CameraX pour un accès moderne à la caméra, incluant l'affichage de l'aperçu en temps réel, la capture de photo, l'importation depuis la galerie et la préparation à l'analyse vidéo avec `ImageAnalysis`.
 
 
 ## Informations Techniques
 
-**Technologies** : Kotlin, Android (API 24+), CameraX, ViewBinding. Bibliothèque d'IA (prévue) : TensorFlow Lite 2.14.0
+**Technologies** : Kotlin, Android (API 24+), CameraX, ViewBinding.
+
+**Bibliothèque d'IA (prévue)** : TensorFlow Lite
 
 **Rôle** : Acquisition d'image via la caméra/galerie.
 
 ---
 
-Prévue: Refactoring pour + de lisibilité et facilité de maintenance et gestion des images en prévision du traitement avec l'IA
+## Avancement - Semaine 2 (24 octobre 2025)
 
-*Dernière mise à jour : 17 octobre 2025*
+### Réalisations techniques
+
+**Refactorisation :**
+- **Création d'un `CameraManager` :** Toute la logique complexe liée à CameraX (démarrage, capture, analyse) a été extraite de la `MainActivity` et encapsulée dans une classe dédiée `CameraManager` dans un nouveau package `camera`.
+- **Séparation des responsabilités :** La `MainActivity` agit maintenant comme un "chef d'orchestre", gérant l'interface utilisateur et les permissions, tandis que le `CameraManager` gère toute la complexité technique de la caméra. Cette séparation rend le code plus lisible, maintenable et facilite grandement la collaboration.
+
+**Modernisation du code :**
+- **Gestion des permissions (permissionsLauncher) avec `ActivityResultLauncher` :** La gestion des permissions a été mise à jour pour utiliser les API modernes `registerForActivityResult`, remplaçant l'ancienne méthode `onRequestPermissionsResult`. Le code de l'activité est ainsi plus simple et aligné avec les meilleures pratiques Android.
+
+---
+
+
+*Dernière mise à jour : 24 octobre 2025*
