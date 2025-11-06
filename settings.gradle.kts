@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "SAE_5.01"
 include(":app")
- 
