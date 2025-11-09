@@ -1,120 +1,99 @@
 package com.example.sae_501
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.provider.MediaStore
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sae_501.ml.ObjectDetector
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.core.content.ContextCompat
+import com.example.sae_501.camera.CameraManager
+import com.example.sae_501.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var objectDetector: ObjectDetector
-    private lateinit var resultTextView: TextView
-    private lateinit var testButton: Button
+    private lateinit var viewBinding: ActivityMainBinding
+    private lateinit var cameraManager: CameraManager
 
-    companion object {
-        private const val TAG = "MainActivity"
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val uri = result.data?.data
+            Toast.makeText(baseContext, "Image sélectionnée de la galerie : $uri", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val permissionsLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        if (permissions.entries.all { it.value }) {
+            cameraManager.startCamera()
+        } else {
+            Toast.makeText(this, "Les autorisations n'ont pas été accordées par l'utilisateur.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
 
-        // Initialiser les vues
-        resultTextView = findViewById(R.id.resultTextView)
-        testButton = findViewById(R.id.testButton)
+        cameraManager = CameraManager(
+            context = this,
+            finderView = viewBinding.viewFinder,
+            lifecycleOwner = this,
+            onImageAnalyzed = { image ->
+                //
+                // TODO: RECONNAISSANCE D'OBJETS ICI
+                //
+                image.close()
+            }
+        )
 
-        // Initialiser le détecteur
-        initializeDetector()
-
-        // Configurer le bouton de test
-        testButton.setOnClickListener {
-            testClassification()
+        if (allPermissionsGranted()) {
+            cameraManager.startCamera()
+        } else {
+            permissionsLauncher.launch(REQUIRED_PERMISSIONS)
         }
+
+        viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
+        viewBinding.galleryButton.setOnClickListener { openGallery() }
     }
 
-    private fun initializeDetector() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                objectDetector = ObjectDetector(applicationContext)
-                objectDetector.initialize()
-
-                withContext(Dispatchers.Main) {
-                    Log.d(TAG, "Détecteur initialisé avec succès")
-                    resultTextView.text = "✅ Modèle chargé!\n${objectDetector.getNumberOfCategories()} catégories disponibles.\n\nAppuyez sur 'Tester' pour commencer."
-                    testButton.isEnabled = true
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(TAG, "Erreur initialisation", e)
-                    resultTextView.text = "Erreur: ${e.message}"
-                }
+    private fun takePhoto() {
+        cameraManager.takePhoto(
+            onSuccess = { uri ->
+                val msg = "Capture photo réussie : $uri"
+                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            },
+            onError = { exception ->
+                Toast.makeText(baseContext, "Échec de la capture photo : ${exception.message}", Toast.LENGTH_SHORT).show()
             }
-        }
+        )
     }
 
-    private fun testClassification() {
-        testButton.isEnabled = false
-        resultTextView.text = "Classification en cours..."
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                // Créer une image de test simple (200x200 pixels bleus)
-                val testBitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
-                testBitmap.eraseColor(android.graphics.Color.BLUE)
-
-                // Mesurer le temps d'inférence
-                val startTime = System.currentTimeMillis()
-                val results = objectDetector.classifyImage(testBitmap)
-                val inferenceTime = System.currentTimeMillis() - startTime
-
-                withContext(Dispatchers.Main) {
-                    displayResults(results, inferenceTime)
-                    testButton.isEnabled = true
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(TAG, "Erreur classification", e)
-                    resultTextView.text = "Erreur: ${e.message}"
-                    testButton.isEnabled = true
-                }
-            }
-        }
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryLauncher.launch(intent)
     }
 
-    private fun displayResults(results: List<com.example.sae_501.ml.Classification>, inferenceTime: Long) {
-        if (results.isEmpty()) {
-            resultTextView.text = "Aucun résultat"
-            return
-        }
-
-        val resultText = buildString {
-            appendLine("✅ Classification réussie!\n")
-            appendLine("⏱️ Temps d'inférence: ${inferenceTime}ms\n")
-            appendLine("📊 Top 5 résultats:\n")
-
-            results.take(5).forEachIndexed { index, classification ->
-                appendLine("${index + 1}. ${classification.label}")
-                appendLine("   Confiance: ${classification.getConfidencePercentage()}%")
-                if (index < results.size - 1) appendLine()
-            }
-        }
-
-        resultTextView.text = resultText
-        Log.d(TAG, "Résultats: $resultText")
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (::objectDetector.isInitialized) {
-            objectDetector.close()
-        }
+        cameraManager.shutdown()
+    }
+
+    companion object {
+        private val REQUIRED_PERMISSIONS = mutableListOf(
+            Manifest.permission.CAMERA
+        ).apply {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }.toTypedArray()
     }
 }
