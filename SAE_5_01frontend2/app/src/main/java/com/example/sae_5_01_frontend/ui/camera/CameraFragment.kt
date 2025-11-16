@@ -1,15 +1,15 @@
-package com.example.sae_5_01_frontend.ui.notifications
+package com.example.sae_5_01_frontend.ui.camera
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.sae_5_01_frontend.databinding.FragmentNotificationsBinding
+import com.example.sae_5_01_frontend.databinding.FragmentCameraBinding
 
-class NotificationsFragment : Fragment() {
+class CameraFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentCameraBinding.inflate(inflater, container, false)
         return binding.root
     }
 

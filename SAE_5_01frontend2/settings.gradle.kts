@@ -1,16 +1,15 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
+
+    plugins {
+        id("androidx.navigation.safeargs") version "2.7.7"
+    }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -19,6 +18,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SAE_5_01-frontend"
+rootProject.name = "SAE_5_01frontend2"
 include(":app")
- 
