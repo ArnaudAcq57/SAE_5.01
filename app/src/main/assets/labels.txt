@@ -1,0 +1,8 @@
+voiture
+camion
+velo
+moto
+bus
+utilitaire
+trottinette
+velo_electrique

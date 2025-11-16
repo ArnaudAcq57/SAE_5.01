@@ -62,7 +62,47 @@ J'ai eu quelques problèmes avec les versions des bibliothèques Android qui ne 
 
 ### Module Caméra (feature/camera)
 
-[À compléter par le membre responsable]
+## Objectifs
+
+Mon travail consiste à intégrer l'acquisition d'image en temps réel ou bien d'importer une image depuis la galerie pour ensuite pouvoir la traiter avec le modèle d'apprentissage.
+
+## Avancement - Semaine 1 (17 octobre 2025)
+
+### Réalisations techniques
+
+**Configuration de l'environnement**
+- Mise en place du projet Android Studio en Kotlin (SDK minimum API 24).
+- **Gestion des permissions :** Ajout des permissions `CAMERA` et `READ_EXTERNAL_STORAGE` dans `AndroidManifest.xml`.
+- **Intégration de CameraX :** Mise en place de la bibliothèque CameraX pour un accès moderne à la caméra, incluant l'affichage de l'aperçu en temps réel, la capture de photo, l'importation depuis la galerie et la préparation à l'analyse vidéo avec `ImageAnalysis`.
+
+
+## Informations Techniques
+
+**Technologies** : Kotlin, Android (API 24+), CameraX, ViewBinding.
+
+**Bibliothèque d'IA (prévue)** : TensorFlow Lite
+
+**Rôle** : Acquisition d'image via la caméra/galerie.
+
+---
+
+## Avancement - Semaine 2 (24 octobre 2025)
+
+### Réalisations techniques
+
+**Refactorisation :**
+- **Création d'un `CameraManager` :** Toute la logique complexe liée à CameraX (démarrage, capture, analyse) a été extraite de la `MainActivity` et encapsulée dans une classe dédiée `CameraManager` dans un nouveau package `camera`.
+- **Séparation des responsabilités :** La `MainActivity` agit maintenant comme un "chef d'orchestre", gérant l'interface utilisateur et les permissions, tandis que le `CameraManager` gère toute la complexité technique de la caméra. Cette séparation rend le code plus lisible, maintenable et facilite grandement la collaboration.
+
+**Modernisation du code :**
+- **Gestion des permissions (permissionsLauncher) avec `ActivityResultLauncher` :** La gestion des permissions a été mise à jour pour utiliser les API modernes `registerForActivityResult`, remplaçant l'ancienne méthode `onRequestPermissionsResult`. Le code de l'activité est ainsi plus simple et aligné avec les meilleures pratiques Android.
+
+---
+
+## Avancement - Semaine 3 (Semaine du 07/11/2025)
+
+### Réalisations techniques
+- **Merge et résolution de conflicts + fusion de fichiers de la branche `feature/camera -> main`**
 
 ### Module Interface (feature/ui)
 
@@ -70,7 +110,11 @@ J'ai eu quelques problèmes avec les versions des bibliothèques Android qui ne 
 
 ### Module Base de données (feature/database)
 
-[À compléter par le membre responsable]
+Lors de la semaine (13/10/2025 - 17/10/2025), j'ai installé Android Studio ainsi que créé une branche Git pour la fonctionalité dont je suis chargé de faire. J'ai également conçu un projet de type Empty Activity. Enfin, j'ai créé deux Entity: Category et Image.
+
+Lors de la semaine (20/10/2025 - 24/10/2025), j'ai créé les fichiers CategoryDAO.kt, ImageDAO.kt, Converters.kt, ImageRepository.kt, TrainingData.kt et AppDatabase.kt.
+
+Lors de la semaine (3/11/2025 - 7/11/2025), j'ai résolu les conflits entre les différents fichiers lors du merge des différentes features faites par les différents membres du groupe.
 
 ## Prochaines Étapes
 
