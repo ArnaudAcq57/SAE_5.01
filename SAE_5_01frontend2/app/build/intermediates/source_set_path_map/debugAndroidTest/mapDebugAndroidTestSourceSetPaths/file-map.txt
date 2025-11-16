@@ -1,0 +1,6 @@
+com.example.sae_5_01_frontend.test.app-annotation-experimental-1.3.1-0 C:\Users\iclid\.gradle\caches\8.10.2\transforms\012f4b75c0215b75746aa4b37ed4a66b\transformed\annotation-experimental-1.3.1\res
+com.example.sae_5_01_frontend.test.app-core-1.5.0-1 C:\Users\iclid\.gradle\caches\8.10.2\transforms\b48be5e0e373d0e6e8924c3d50727cf4\transformed\core-1.5.0\res
+com.example.sae_5_01_frontend.test.app-androidTest-2 C:\Users\iclid\AndroidStudioProjects\SAE_5_01frontend2\app\build\generated\res\resValues\androidTest\debug
+com.example.sae_5_01_frontend.test.app-mergeDebugAndroidTestResources-3 C:\Users\iclid\AndroidStudioProjects\SAE_5_01frontend2\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.sae_5_01_frontend.test.app-mergeDebugAndroidTestResources-4 C:\Users\iclid\AndroidStudioProjects\SAE_5_01frontend2\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.sae_5_01_frontend.test.app-debugAndroidTest-5 C:\Users\iclid\AndroidStudioProjects\SAE_5_01frontend2\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

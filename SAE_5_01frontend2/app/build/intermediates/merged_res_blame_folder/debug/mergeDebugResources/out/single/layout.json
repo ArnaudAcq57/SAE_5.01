@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_parametres.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_parametres.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_details.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_details.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_historique.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_historique.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_dashboard.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/activity_main.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/item_historique.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/item_historique.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_notifications.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_home.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.sae_5_01_frontend.app-mergeDebugResources-53:/layout/fragment_camera.xml",
+        "source": "com.example.sae_5_01_frontend.app-main-56:/layout/fragment_camera.xml"
+    }
+]

@@ -1,0 +1,3 @@
+com.example.sae_5_01_frontend.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/dark_background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/detailsImage"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop"
+            android:background="@color/dark_surface" />
+
+        <TextView
+            android:id="@+id/detailsType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:paddingTop="16dp" />
+
+        <TextView
+            android:id="@+id/detailsPourcentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80%"
+            android:textColor="@color/text_medium"
+            android:textSize="18sp"
+            android:paddingTop="4dp" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Supprimer de l'historique"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/brand_blue_dark" />
+
+    </LinearLayout>
+
+</ScrollView>

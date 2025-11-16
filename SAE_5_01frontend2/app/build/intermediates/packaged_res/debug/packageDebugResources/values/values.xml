@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="brand_blue">#3498DB</color>
+    <color name="brand_blue_dark">#2980B9</color>
+    <color name="dark_background">#121212</color>
+    <color name="dark_surface">#1E1E1E</color>
+    <color name="text_light">#FFFFFFFF</color>
+    <color name="text_medium">#B0B0B0</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <item name="user_list" type="id"/>
+    <string name="app_name">SAE_5_01frontend</string>
+    <string name="title_camera">Caméra</string>
+    <string name="title_historique">Historique</string>
+    <string name="title_parametres">Paramètres</string>
+    <style name="Theme.SAE_5_01_frontend" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+</resources>
