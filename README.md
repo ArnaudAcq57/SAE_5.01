@@ -106,8 +106,8 @@ Mon travail consiste à intégrer l'acquisition d'image en temps réel ou bien d
 
 ### Module Interface (feature/ui)
 
-mise en place de la base f application
-mise en place des menu de navigation (camera, résultat et paramètre)
+mise en place de la base f application,
+mise en place des menu de navigation (camera, résultat et paramètre),
 developpement des écrans en cours
 ### Module Base de données (feature/database)
 
